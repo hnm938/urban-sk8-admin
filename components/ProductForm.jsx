@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import Spinner from "./Spinner";
 import { ReactSortable } from "react-sortablejs";
-import { Category } from "@/models/Category";
 
 import styles from "@/styles/components/ProductForm.module.scss";
 
@@ -171,7 +171,7 @@ useEffect(() => {
             {!!images?.length &&
               images.map((link) => (
                 <div key={link} className="h-24 my-1 mx-1">
-                  <img src={link} alt="" className="rounded-md" />
+                  <Image src={link} alt="" className="rounded-md" />
                 </div>
               ))}
           </ReactSortable>
