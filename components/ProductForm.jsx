@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Spinner from "./Spinner";
 import { ReactSortable } from "react-sortablejs";
 
@@ -42,36 +42,36 @@ export default function ProductForm({
       },
       { timeout: 5000 }
     );
-
-
   }, []);
 
-function getPropertiesRecursively(categoryId, properties = []) {
-  const category = categories.find((cat) => cat._id === categoryId);
+  const getPropertiesRecursively = useCallback(
+    (categoryId, properties = []) => {
+      const category = categories.find((cat) => cat._id === categoryId);
 
-  if (!category || properties.includes(category)) {
-    return properties;
-  }
+      if (!category || properties.includes(category)) {
+        return properties;
+      }
 
-  properties.push(category);
+      properties.push(category);
 
-  if (category.parent && category.parent._id) {
-    return getPropertiesRecursively(category.parent._id, properties);
-  }
+      if (category.parent && category.parent._id) {
+        return getPropertiesRecursively(category.parent._id, properties);
+      }
 
-  return properties;
-}
+      return properties;
+    },
+    [categories]
+  );
 
-useEffect(() => {
-  if (categories.length > 0 && category) {
-    const propertiesToFill = getPropertiesRecursively(category, []);
-    const properties = propertiesToFill
-      .map((category) => category.properties)
-      .flat();
-    setPropertiesToFill(properties);
-  }
-}, [categories, category, getPropertiesRecursively]);
-
+  useEffect(() => {
+    if (categories.length > 0 && category) {
+      const propertiesToFill = getPropertiesRecursively(category, []);
+      const properties = propertiesToFill
+        .map((category) => category.properties)
+        .flat();
+      setPropertiesToFill(properties);
+    }
+  }, [categories, category, getPropertiesRecursively]);
 
   async function saveProduct(e) {
     e.preventDefault();
@@ -128,7 +128,7 @@ useEffect(() => {
       return newProductProps;
     });
   }
-  
+
   return (
     <div className={styles["ProductForm"]}>
       <h1>{containerTitle}</h1>
