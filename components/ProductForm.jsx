@@ -70,7 +70,7 @@ useEffect(() => {
       .flat();
     setPropertiesToFill(properties);
   }
-}, [categories, category]);
+}, [categories, category, getPropertiesRecursively]);
 
 
   async function saveProduct(e) {
@@ -224,7 +224,7 @@ useEffect(() => {
         </select>
         {propertiesToFill.length > 0 &&
           propertiesToFill.map((p) => (
-            <div className={styles["property-container"]}>
+            <div className={styles["property-container"]} key={p._id}>
               <label>{p.name}</label>
               <select
                 value={productProperties[p.name]}
