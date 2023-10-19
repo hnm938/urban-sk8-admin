@@ -1,0 +1,117 @@
+@import "../mixins";
+
+.ProductForm {
+  width: 100%;
+  height: 100vh;
+  min-height: fit-content;  
+
+  hr {
+    margin: 0.5em 0 1.5em 0;
+  }
+
+  h1 {
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(32px, 1.5cqw, 1.5cqw);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+
+  label {
+    position: relative;
+    margin: 2cqw 0 1cqw 0;
+    padding: 0 0 0.15cqw 0;
+    
+    border-bottom: solid var(--coral-1) 2px;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+    font-family: "Titillium Web", sans-serif;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    background-color: var(--white-3);
+  }
+
+  textarea, input { margin: 1cqw 0 1.5cqw 0; }
+
+  select:nth-last-of-type(1) { margin: 1cqw 0 0.5cqw 0; }
+
+  .product-images {
+    width: 100%;
+    margin: 1cqw 0 55px 0;
+
+    position: relative;
+
+    img {
+      height: 100%;
+      aspect-ratio: 1 / 1;
+    }
+
+    .image-placeholder {
+      height: 35px;
+      width: 100%;
+      margin: 0;
+      
+      position: absolute;
+      bottom: -40px;
+
+      @include flex;
+      
+      background-color: var(--coral-1);
+      border-radius: 4px;
+
+      cursor: pointer;
+      transition: background-color 150ms ease;
+
+      svg { color: var(--white-2); }
+
+      &:hover {
+        background-color: var(--coral-2);
+      }
+    }
+  }
+
+  button {
+    width: fit-content;
+    margin-bottom: 1cqw;
+    padding: 0.5cqw 1cqw;
+
+    border: solid var(--coral-1) 1px;
+    border-radius: 4px;
+
+    color: var(--coral-1);
+    font-weight: 600;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+
+    transition: all 150ms ease;
+
+    &:hover {
+      color: var(--white-2);
+      background-color: var(--coral-1);
+    }
+  }
+
+  .property-container {
+    @include flex(column, flex-start);
+    
+    label {
+      font-size: 16px;
+      color: var(--coral-1);
+      margin: 0;
+      border: none;
+    }
+    select {
+      opacity: 0.75;
+      width: fit-content;
+      min-width: 150px;
+      text-align: center;
+      padding: 0.1cqw 0.5cqw;
+      margin: 0 0 0.5cqw 0.25cqw;
+    }
+
+    &:nth-last-of-type(1) { margin-bottom: 3cqw; }
+  }
+}

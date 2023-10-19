@@ -1,0 +1,76 @@
+@import "mixins";
+
+.Sidebar {
+  height: calc(100vh - 55px);
+  padding: 0;
+
+  transform: translateY(55px);
+
+  background: var(--white-2);
+
+  @include flex(column, flex-start, flex-start);
+  gap: 1em 0;
+
+  border-right: solid lightgray 1px;
+
+  h1,
+  h2 {
+    width: 100%;
+    margin-left: 2cqw;
+
+    font-size: 2.15cqw;
+    font-weight: 700;
+    line-height: 1em;
+  }
+  h1 {
+    margin-top: 1cqw;
+    margin-bottom: 0.25cqw;
+    letter-spacing: 0.15em;
+  }
+  h2 {
+    transform: translateY(-0.5rem);
+    color: gray;
+    letter-spacing: 0.1em;
+    font-size: 1cqw;
+    font-weight: 500;
+    font-family: "Titillium Web", sans-serif;
+  }
+
+  hr {
+    width: 95%;
+    height: 1px;
+    margin: 0 auto;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.1); 
+  }
+
+  table {
+    width: 95%;
+
+    tr td {
+      padding: 0.5cqw 1cqw;
+      font-size: clamp(14px, 0.9cqw, 0.9cqw);
+
+      span {
+        color: gray;
+        font-size: clamp(8px, 0.6cqw, 0.6cqw);
+      }
+    }
+
+    thead tr td {
+      color: var(--black-1);
+      font-family: "Titillium Web", sans-serif;
+      letter-spacing: 0.1em;
+      font-size: clamp(18px, 1cqw, 1cqw);
+      font-weight: 600;
+      
+      border-bottom: solid var(--coral-1) 4px;
+      background-color: var(--white-2);
+      filter: brightness(0.95);
+    }
+
+    tbody tr td {
+      font-family: "Titillium Web", sans-serif;
+    }
+  }
+}

@@ -1,0 +1,53 @@
+@import "mixins";
+
+.table-filters {
+  width: 95%;
+
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  
+  button {
+    padding: 0.25cqw 1cqw;
+    margin: 0.25em 0.25em;
+    min-width: 100px;
+
+    color: var(--coral-3);
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 600;
+    border: solid var(--coral-3) 1px;
+    border-radius: 4px;
+
+    &.selected {
+      font-weight: 600;
+      color: var(--coral-1);
+      border-color: var(--coral-1);
+    }
+
+    &:hover { color: var(--white-2); }
+  }
+}
+
+.category-empty {
+  height: fit-content;
+
+  @include flex;
+
+  h1, h2 {
+    text-align: center;
+    line-height: normal;
+    margin: 0 auto;
+    color: lightgray;
+    white-space: nowrap;
+    position: relative;
+    font-size: 3cqw;
+  }
+  
+  h2 {
+    letter-spacing: 0.15em;
+    line-height: 1.5em;
+    width: 100%;
+    font-size: 0.75cqw;
+    font-family: "Titillium Web", sans-serif;
+  }
+}

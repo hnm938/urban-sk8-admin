@@ -1,0 +1,54 @@
+@import "mixins";
+
+.Navbar {
+  width: 100vw;
+  height: 55px;
+  padding: 1rem 1.5rem;
+
+  position: absolute;
+
+  background-color: whitesmoke;
+  border-bottom: solid lightgray 1px;
+
+  @include flex(row, center, flex-start);
+  gap: 0 0.5rem;
+
+  z-index: 999;
+
+  h1 {
+    color: black;
+    margin: 0 1rem 0 0;
+    font-weight: 900;
+    font-size: 2rem;
+  }
+
+  a {
+    padding: 0.25rem 0.5rem;
+
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    color: gray;
+
+    transition: color 150ms ease;
+
+    span.active { color: black; }
+    &:hover { color: black; }
+  }
+
+  .logout-btn {
+    width: 3rem;
+    height: 3rem;
+    border: solid lightgray 1px;
+    border-radius: 0.25rem;
+
+    @include flex;
+
+    position: absolute;
+    right: 1rem;
+
+    cursor: pointer;
+    transition: background-color 150ms ease;
+    
+    &:hover { background-color: lightgray; }
+  }
+}
