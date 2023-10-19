@@ -226,7 +226,7 @@ export default function Categories() {
             >
               <option value="0">No parent category</option>
               {categories.map((category) => (
-                <option value={category._id} key={category._id}>
+                <option key={category._id} value={category._id}>
                   {category.name}
                 </option>
               ))}
@@ -256,11 +256,13 @@ export default function Categories() {
             </button>
             {properties.length > 0 &&
               properties.map((property, index) => (
-                <div key={property.name} className={styles["property-container"]}>
+                <div
+                  key={index}
+                  className={styles["property-container"]}
+                >
                   <input
                     type="text"
                     className="mb-0"
-                    key={property.name}
                     value={property.name}
                     onChange={(e) =>
                       handlePropertyNameChange(index, property, e.target.value)
@@ -270,7 +272,6 @@ export default function Categories() {
                   <input
                     type="text"
                     className={`${styles["property-input"]} mb-0`}
-                    key={property.name}
                     value={property.values}
                     onChange={(e) =>
                       handlePropertyValuesChange(
