@@ -134,7 +134,7 @@ export default function Categories() {
 
     return (
       <React.Fragment key={category._id}>
-        <tr style={bgColorStyle}>
+        <tr key={category._id} style={bgColorStyle}>
           <td style={{ color: "var(--coral-1)" }}>
             {index !== undefined ? index + 1 : ""}
           </td>
