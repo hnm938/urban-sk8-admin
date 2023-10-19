@@ -8,6 +8,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "engines": {
+    "node": "18.x"
+  },
   "dependencies": {
     "@auth/mongodb-adapter": "^2.0.0",
     "@aws-sdk/client-s3": "^3.414.0",
