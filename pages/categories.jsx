@@ -256,10 +256,11 @@ export default function Categories() {
             </button>
             {properties.length > 0 &&
               properties.map((property, index) => (
-                <div className={styles["property-container"]}>
+                <div key={property.name} className={styles["property-container"]}>
                   <input
                     type="text"
                     className="mb-0"
+                    key={property.name}
                     value={property.name}
                     onChange={(e) =>
                       handlePropertyNameChange(index, property, e.target.value)
@@ -269,6 +270,7 @@ export default function Categories() {
                   <input
                     type="text"
                     className={`${styles["property-input"]} mb-0`}
+                    key={property.name}
                     value={property.values}
                     onChange={(e) =>
                       handlePropertyValuesChange(
