@@ -8,6 +8,7 @@ import ProductForm from "@/components/ProductForm";
 import styles from "@/styles/Product.module.scss";
 
 import Swal from "sweetalert2";
+import Popup from "@/components/Popup";
 
 export default function Products() {
   const [showProductForm, setShowProductForm] = useState(false);
@@ -68,6 +69,7 @@ export function ProductTable() {
       if (result.isConfirmed) {
         const { _id } = product;
         await axios.delete("/api/products?_id=" + _id, { timeout: 5000 });
+        Popup("Product Deleted");
       }
     });
   };

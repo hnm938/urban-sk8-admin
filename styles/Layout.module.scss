@@ -1,5 +1,103 @@
 @import "mixins";
 
+.Login {
+  width: fit-content;
+  height: fit-content;
+  padding: 2em 6em 1em 6em;
+  margin: 0 auto;
+  
+  background-color: var(--white-1);
+  
+  box-shadow: 15px 15px 30px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+
+  @include flex(column, center, flex-start);
+  gap: 1cqw 0;
+
+  transform: translateY(150px);
+
+  h1, h2 {
+    font-size: clamp(32px, 2cqw, 2cqw);
+    font-weight: 600;
+  }
+
+  p {
+    text-align: center;
+    margin-top: 3em;
+    font-family: "Titillium Web", sans-serif;
+    font-size: 16px;
+
+    span {
+      @include flex(row);
+      font-family: inherit;
+      
+      svg {
+        margin: 0 0.15em;
+        width: 17px;
+        height: 17px;
+        cursor: pointer;
+        color: var(--coral-1);
+        transform: translateY(-2px);
+      }
+    }
+    a {
+      font-family: inherit;
+      color: var(--coral-1);
+    }
+  }
+
+  
+  .title-container {
+    margin: 1cqw 0 1cqw 0;
+    line-height: 2em;
+    @include flex(column, center, center);
+    
+    h1 {
+      position: relative;
+      &::after {
+        @include pseudo(calc(100% + 50px), 2px, var(--coral-1), 0, 1, -5px);
+        left: 50%;
+        transform: translateX(calc(-50% - 25px));
+      }
+    }
+    h2 {
+      margin-top: 0.5em;
+      font-family: "Titillium Web", sans-serif;
+      font-size: clamp(28px, 1.5cqw, 1.5cqw);
+      font-weight: 500;
+      letter-spacing: 0.15em;
+    }
+  }
+
+  .login-button {
+    width: 100%;
+    font-size: 16px;
+    padding: 0.5em 2em;
+    white-space: nowrap;
+  }
+
+  .social-links {
+    width: 100%;
+    transform: translateY(-0.2em);
+    @include flex(row);
+    gap: 0 0.5em;
+
+    a, button {
+      width: 100%;
+      @include flex;
+      
+      svg {
+        width: 30px;
+        height: 30px;
+        stroke-width: 1.25px;
+        color: var(--coral-2);
+      }
+
+      &:hover svg { color: var(--white-2); }
+    }
+  }
+}
+
 .page-container {
   height: calc(100vh - 55px);
   padding: 0 5cqw;

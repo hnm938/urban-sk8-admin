@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import styles from "@/styles/components/CategoryForm.module.scss";
 
 import Swal from "sweetalert2";
+import Popup from "@/components/Popup";
 
 export default function Categories() {
   const [editedCategory, setEditedCategory] = useState(null);
@@ -25,21 +26,25 @@ export default function Categories() {
 
   async function saveCategory(e) {
     e.preventDefault();
+    if (!name) { return Popup("Please enter a name", "error"); }
+    
     const data = {
       name,
       parentCategory,
-      properties: properties.map((p) => ({
+      properties: Array.isArray(properties) ? properties.map((p) => ({
         name: p.name,
         values: p.values.split(","),
-      })),
+      })) : [],
     };
 
     if (editedCategory) {
       data._id = editedCategory._id;
       await axios.put("/api/categories", data, { timeout: 5000 });
+      Popup("Changes Saved");
       setEditedCategory(null);
     } else {
       await axios.post("/api/categories", data, { timeout: 5000 });
+      Popup("Category Created");
     }
 
     setName("");
@@ -81,6 +86,7 @@ export default function Categories() {
         const { _id } = category;
         await axios.delete("/api/categories?_id=" + _id, { timeout: 5000 });
         fetchCategories();
+        Popup("Category Deleted");
       }
     });
   }
@@ -91,10 +97,31 @@ export default function Categories() {
     });
   }
 
+  function toPascalCaseCommas(input) {
+    const words = input.split(",").map((word) => word.trim());
+    const pascalCased = words.map((word) => {
+      return word
+        .replace(/\W+/g, "") // Remove non-word characters except spaces
+        .replace(
+          /(\w)(\w*)/g,
+          (_, first, rest) => first.toUpperCase() + rest.toLowerCase()
+        );
+    });
+
+    return pascalCased.join(","); // Join the words with commas
+  }
+
+  function toPascalCase(str) {
+    return str
+      .replace(/[\W_]+(.)/g, (_, char) => char.toUpperCase())
+      .replace(/^(.)/, (_, char) => char.toUpperCase())
+      .replace(/([a-z])([A-Z])/g, "$1 $2"); // Add space between words
+  }
+
   function handlePropertyNameChange(index, property, newName) {
     setProperties((prev) => {
       const properties = [...prev];
-      properties[index].name = newName;
+      properties[index].name = toPascalCase(newName);
       return properties;
     });
   }
@@ -102,7 +129,7 @@ export default function Categories() {
   function handlePropertyValuesChange(index, property, newValues) {
     setProperties((prev) => {
       const properties = [...prev];
-      properties[index].values = newValues;
+      properties[index].values = toPascalCaseCommas(newValues);
       return properties;
     });
   }
@@ -217,7 +244,7 @@ export default function Categories() {
               type="text"
               placeholder={"Category name"}
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setName(toPascalCase(e.target.value))}
             />
             <select
               id="parent-dropdown"
@@ -247,7 +274,9 @@ export default function Categories() {
                 Cancel
               </button>
             )}
-            <button>Save</button>
+            <button filled="">
+              {editedCategory ? "Save" : "Create Category"}
+            </button>
           </div>
           <div>
             <label className="block">Properties</label>
@@ -255,11 +284,8 @@ export default function Categories() {
               Add new property
             </button>
             {properties.length > 0 &&
-              properties.map((property, index) => (
-                <div
-                  key={index}
-                  className={styles["property-container"]}
-                >
+              properties?.map((property, index) => (
+                <div key={index} className={styles["property-container"]}>
                   <input
                     type="text"
                     className="mb-0"
@@ -282,7 +308,11 @@ export default function Categories() {
                     }
                     placeholder="values, comma seperated"
                   />
-                  <button onClick={() => removeProperty(index)} type="button">
+                  <button
+                    filled=""
+                    onClick={() => removeProperty(index)}
+                    type="button"
+                  >
                     Remove
                   </button>
                 </div>

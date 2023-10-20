@@ -3,11 +3,9 @@ import fs from "fs";
 import mime from "mime-types";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { mongooseConnect } from "@/lib/mongoose";
-import { isAdminRequest } from "./auth/[...nextauth]";
+import { isAdminRequest } from "../auth/[...nextauth]";
 
-const bucketName = "ecommerce-app";
-
-export default async function handle(req, res) {
+export default async function handler(req, res) {
   await mongooseConnect();
   await isAdminRequest(req, res);
 
@@ -35,14 +33,14 @@ export default async function handle(req, res) {
 
     await client.send(
       new PutObjectCommand({
-        Bucket: bucketName,
+        Bucket: process.env.BUCKET_NAME,
         Key: filename,
         Body: fs.readFileSync(file.path),
         ACL: "public-read",
-        ContentType: mime.lookup(file.path)
+        ContentType: mime.lookup(file.path),
       })
     );
-    const link = `https://s3.tebi.io/${bucketName}/${filename}`;
+    const link = `https://s3.tebi.io/${process.env.BUCKET_NAME}/${filename}`;
     links.push(link);
   }
   return res.json({links});
