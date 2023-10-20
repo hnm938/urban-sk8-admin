@@ -45,9 +45,11 @@
   }
 
   table {
+    margin-bottom: 2em;
     width: 95%;
 
     tr td {
+      border-right: solid rgba(0, 0, 0, 0.1) 1px;
       padding: 0.5cqw 1cqw;
       font-size: clamp(14px, 0.9cqw, 0.9cqw);
 
@@ -55,7 +57,11 @@
         color: gray;
         font-size: clamp(8px, 0.6cqw, 0.6cqw);
       }
+
+      &:nth-last-of-type(1) { border-right: none; }
     }
+
+    tr:nth-last-of-type(1) { border-bottom: solid rgba(0, 0, 0, 0.1) 1px; }
 
     thead tr td {
       color: var(--black-1);

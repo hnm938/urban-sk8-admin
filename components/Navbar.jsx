@@ -58,6 +58,11 @@ export default function Navbar() {
           Orders
         </span>
       </Link>
+      <Link href={"/admins"}>
+        <span className={pathname.includes("/admins") ? styles["active"] : ""}>
+          Admins
+        </span>
+      </Link>
       <Link href={"/settings"}>
         <span
           className={pathname.includes("/settings") ? styles["active"] : ""}

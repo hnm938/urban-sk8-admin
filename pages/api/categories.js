@@ -2,7 +2,7 @@ import { mongooseConnect } from "@/lib/mongoose";
 import { Category } from "@/models/Category";
 import { isAdminRequest } from "./auth/[...nextauth]";
 
-export default async function handle(req, res) {
+export default async function handler(req, res) {
   const { method } = req;
   await mongooseConnect();
   await isAdminRequest(req, res);

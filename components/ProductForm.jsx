@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useRouter } from "next/router";
-import Image from "next/image";
 import { useEffect, useState, useCallback } from "react";
 import Spinner from "./Spinner";
 import { ReactSortable } from "react-sortablejs";
 
 import styles from "@/styles/components/ProductForm.module.scss";
+import Popup from "./Popup";
 
 export default function ProductForm({
   _id,
@@ -73,8 +73,35 @@ export default function ProductForm({
     }
   }, [categories, category, getPropertiesRecursively]);
 
+  useEffect(() => {
+    saveImage();
+  }, [images]);
+
+  async function saveImage() {
+    const data = { images };
+
+    if (_id) {
+      axios.put("/api/products", { ...data, _id });
+    }
+
+    Popup("Images Updated");
+  }
+
   async function saveProduct(e) {
     e.preventDefault();
+
+    if (!title) {
+      return Popup("Missing Product Name", "error");
+    }
+    if (!price) {
+      return Popup("Missing Product Price", "error");
+    }
+    if (images.length === 0) {
+      await setTimeout(() => {
+        Popup("Missing Product Image", "error");
+      }, 2100);
+    }
+
     const data = {
       title,
       category,
@@ -84,12 +111,12 @@ export default function ProductForm({
       properties: productProperties,
     };
     if (_id) {
-      await axios.put("/api/products", { ...data, _id }, { timeout: 5000 });
+      await axios.put("/api/products", { ...data, _id });
+      Popup("Product Updated");
     } else {
-      await axios.post("/api/products", data, { timeout: 5000 });
+      await axios.post("/api/products", data);
+      Popup("Product Created");
     }
-
-    window.location.reload();
   }
 
   if (goToProducts) {
@@ -109,12 +136,22 @@ export default function ProductForm({
       for (const file of files) {
         data.append("file", file);
       }
-      const res = await axios.post("/api/upload", data, { timeout: 5000 });
-      setImages((oldImages) => {
+
+      const res = await axios.post("/api/image/upload", data, { timeout: 5000 });
+      
+      await setImages((oldImages) => {
         return [...oldImages, ...res.data.links];
       });
+
       setIsUploading(false);
     }
+  }
+
+  async function deleteImage(link) {
+    await axios.post("/api/image/delete", { link });
+    setImages((prevImages) =>
+      prevImages.filter((image) => image !== link)
+    );
   }
 
   function updateImagesOrder(images) {
@@ -169,9 +206,30 @@ export default function ProductForm({
             className="flex flex-wrap gap-1"
           >
             {!!images?.length &&
-              images.map((link) => (
-                <div key={link} className="h-24 my-1 mx-1">
-                  <Image src={link} alt="" className="rounded-md" />
+              images.map((link, index) => (
+                <div key={index} className={styles["image--container"]}>
+                  <img src={link} alt="" />
+                  <button
+                    className={styles["image--delete-button"]}
+                    filled=""
+                    onClick={() => { deleteImage(link); }}
+                    type="button"
+                  >
+                    <svg
+                      className="h-7 w-7 text-[var(--coral-1)]"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      {" "}
+                      <circle cx="12" cy="12" r="10" />{" "}
+                      <line x1="15" y1="9" x2="9" y2="15" />{" "}
+                      <line x1="9" y1="9" x2="15" y2="15" />
+                    </svg>
+                  </button>
                 </div>
               ))}
           </ReactSortable>
