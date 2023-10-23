@@ -168,7 +168,10 @@ export default function ProductForm({
 
   return (
     <div className={styles["ProductForm"]}>
-      <h1>{containerTitle}</h1>
+      <div style={{ lineHeight: "2.5em" }}>
+        <h1>{containerTitle}</h1>
+        <h2 className="mb-3 text-sm text-gray-500">PID: {_id}</h2>
+      </div>
       <form onSubmit={saveProduct}>
         <label>Product name</label>
         <input
@@ -212,7 +215,9 @@ export default function ProductForm({
                   <button
                     className={styles["image--delete-button"]}
                     filled=""
-                    onClick={() => { deleteImage(link); }}
+                    onClick={() => {
+                      deleteImage(link);
+                    }}
                     type="button"
                   >
                     <svg
