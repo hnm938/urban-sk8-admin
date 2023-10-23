@@ -53,14 +53,14 @@ export default function Navbar() {
           Categories
         </span>
       </Link>
-      <Link href={"/orders"}>
-        <span className={pathname.includes("/orders") ? styles["active"] : ""}>
-          Orders
-        </span>
-      </Link>
       <Link href={"/admins"}>
         <span className={pathname.includes("/admins") ? styles["active"] : ""}>
           Admins
+        </span>
+      </Link>
+      <Link href={"/orders"}>
+        <span className={pathname.includes("/orders") ? styles["active"] : ""}>
+          Orders
         </span>
       </Link>
       <Link href={"/settings"}>
