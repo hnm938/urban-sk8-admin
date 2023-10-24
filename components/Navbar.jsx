@@ -1,5 +1,10 @@
+import Image from "next/image";
+import Logo from "@/assets/logo.svg";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
+
+import { Button } from "@/components/StyledComponents";
 
 import { signOut } from "next-auth/react";
 
@@ -19,20 +24,10 @@ export default function Navbar() {
 
   return (
     <nav className={styles["Navbar"]}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className="w-8 h-8"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
-        />
-      </svg>
+      <div className={styles["title"]}>
+        <Image src={Logo} />
+        <h1>Panel</h1>
+      </div>
 
       <Link href={"/"}>
         <span className={pathname === "/" ? styles["active"] : ""}>
@@ -53,11 +48,6 @@ export default function Navbar() {
           Categories
         </span>
       </Link>
-      <Link href={"/admins"}>
-        <span className={pathname.includes("/admins") ? styles["active"] : ""}>
-          Admins
-        </span>
-      </Link>
       <Link href={"/orders"}>
         <span className={pathname.includes("/orders") ? styles["active"] : ""}>
           Orders
@@ -70,22 +60,28 @@ export default function Navbar() {
           Settings
         </span>
       </Link>
-      <button onClick={logout} className={styles["logout-btn"]}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-6 h-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
-          />
-        </svg>
-      </button>
+      <div className={styles["navbar-controls"]}>
+        <Button onClick={logout} className={styles["logout-button"]}>
+          Logout
+        </Button>
+        <Button className={styles["collapse-button"]} onClick={() => {
+          document.querySelector(`.${styles["Navbar"]}`).classList.toggle(styles["opened"]);
+        }}>
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </Button>
+      </div>
     </nav>
   );
 }

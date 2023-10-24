@@ -1,11 +1,14 @@
 import axios from "axios";
+
 import { useRouter } from "next/router";
 import { useEffect, useState, useCallback } from "react";
+
 import Spinner from "./Spinner";
 import { ReactSortable } from "react-sortablejs";
 
 import styles from "@/styles/components/ProductForm.module.scss";
 import Popup from "./Popup";
+import { Button, Splitter } from "./StyledComponents";
 
 export default function ProductForm({
   _id,
@@ -115,6 +118,7 @@ export default function ProductForm({
       Popup("Product Updated");
     } else {
       await axios.post("/api/products", data);
+      window.location.reload();
       Popup("Product Created");
     }
   }
@@ -172,6 +176,7 @@ export default function ProductForm({
         <h1>{containerTitle}</h1>
         <h2 className="mb-3 text-sm text-gray-500">PID: {_id}</h2>
       </div>
+      <Splitter />
       <form onSubmit={saveProduct}>
         <label>Product name</label>
         <input
@@ -196,9 +201,9 @@ export default function ProductForm({
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         />
-        <div className="flex gap-2 py-1 mt-3">
-          <button>Save</button>
-          <button onClick={goBack}>Cancel</button>
+        <div className="flex gap-2 py-1">
+          <Button>Save</Button>
+          <Button $filled onClick={goBack}>Cancel</Button>
         </div>
 
         <label>Photos</label>
@@ -212,9 +217,9 @@ export default function ProductForm({
               images.map((link, index) => (
                 <div key={index} className={styles["image--container"]}>
                   <img src={link} alt="" />
-                  <button
+                  <Button
+                    $filled
                     className={styles["image--delete-button"]}
-                    filled=""
                     onClick={() => {
                       deleteImage(link);
                     }}
@@ -234,7 +239,7 @@ export default function ProductForm({
                       <line x1="15" y1="9" x2="9" y2="15" />{" "}
                       <line x1="9" y1="9" x2="15" y2="15" />
                     </svg>
-                  </button>
+                  </Button>
                 </div>
               ))}
           </ReactSortable>

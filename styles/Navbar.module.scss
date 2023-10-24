@@ -14,12 +14,26 @@
   gap: 0 0.5rem;
 
   z-index: 999;
+  overflow: hidden;
 
-  h1 {
-    color: black;
-    margin: 0 1rem 0 0;
-    font-weight: 900;
-    font-size: 2rem;
+  .title {
+    border-right: solid rgba(0, 0, 0, 0.1) 1px;
+    padding-right: 1em;
+    @include flex(row);
+    gap: 0 0.5em;
+
+    img {
+      width: 30px;
+      transform: translateY(-2px);
+    }
+
+    h1 {
+      color: var(--black-1);
+      font-weight: 500;
+      font-size: 1.5rem;
+      margin: 0;
+      font-family: "Titillium Web", sans-serif;
+    }
   }
 
   a {
@@ -31,24 +45,83 @@
 
     transition: color 150ms ease;
 
-    span.active { color: black; }
-    &:hover { color: black; }
+    span.active {
+      color: black;
+    }
+    &:hover {
+      color: black;
+    }
   }
 
-  .logout-btn {
-    width: 3rem;
-    height: 3rem;
-    border: solid lightgray 1px;
-    border-radius: 0.25rem;
-
-    @include flex;
+  .navbar-controls {
+    @include flex(row);
+    gap: 0 0.5em;
 
     position: absolute;
     right: 1rem;
 
-    cursor: pointer;
-    transition: background-color 150ms ease;
+    button { height: 35px; }
     
-    &:hover { background-color: lightgray; }
+    .logout-button {
+      padding: 0 1em;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .collapse-button {
+      display: none;
+      border: none;
+
+      svg {
+        color: var(--black-1);
+        height: 100%;
+        width: 100%;
+      }
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
   }
+
+  @media only screen and (max-width: 800px) {
+    height: fit-content;
+    max-height: 55px;
+    position: fixed;
+    top: 0;
+    @include flex(column, center, flex-start);
+
+    .title {
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      border: none;
+    }
+
+    a {
+      background-color: inherit;
+      width: 100%;
+      padding: 0.5em 1em;
+      border-bottom: solid rgba(0, 0, 0, 0.1) 1px;
+      transition: filter 150ms ease;
+
+      &:nth-of-type(1) { margin-top: 2.25em; }
+      &:nth-last-of-type(1) { border: none; }
+      &:hover { filter: brightness(0.93); }
+    }
+
+    .navbar-controls {
+      position: absolute;
+      top: 10px;
+      right: 1rem;
+
+      .collapse-button {
+        display: block;
+      }
+    }
+  }
+}
+
+.Navbar.opened {
+  max-height: fit-content;
 }
