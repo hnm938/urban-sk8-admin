@@ -31,7 +31,9 @@
 
   table, tr, td { font-family: "Titillium Web", sans-serif; }
   table {
+    border: solid red 1px;
     width: 90vw;
+    min-width: 280px;
     background-color: white;
 
     tr td {
@@ -63,12 +65,9 @@
   }
 
   .admins--add-new {
-    form input, form button {
-      min-width: 75px;
-      height: 45px;
-    }
+    form input, form button { min-width: 75px; }
     form input {
-      min-width: 250px;
+      min-width: 220px;
       width: 20cqw;
     }
   }

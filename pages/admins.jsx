@@ -5,6 +5,7 @@ import axios from "axios";
 
 import Swal from "sweetalert2";
 import Popup from "@/components/Popup";
+import { Button } from "@/components/StyledComponents";
 
 import styles from "@/styles/Admins.module.scss";
 
@@ -67,58 +68,55 @@ export default function Admins() {
   }, []);
 
   return (
-    <Layout>
-      <div className={styles["Admin"]}>
-        <h1>Manage Admins</h1>
-        <hr />
-        <section className={styles["admins--add-new"]}>
-          <h2>Add New Admin</h2>
-          <form onSubmit={addAdmin} className="flex row gap-x-2 my-[0.5cqw]">
-            <input
-              type="text"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-              placeholder="adminaddress@gmail.com"
-            />
-            <button filled="">Add</button>
-          </form>
-        </section>
-        <section className={styles["admins--current"]}>
-          <h2>Admins</h2>
-          <table>
-            <thead>
-              <tr>
-                <td>Google Email Address</td>
-                <td></td>
-                <td></td>
-              </tr>
-            </thead>
-            <tbody>
-              {adminEmails.length > 0 &&
-                adminEmails.map((adminEmail) => (
-                  <tr key={adminEmail._id}>
-                    <td>{adminEmail.email}</td>
-                    <td>
-                      {adminEmail.createdAt && prettyDate(adminEmail.createdAt)}
-                    </td>
-                    <td>
-                      <button
-                        onClick={() =>
-                          deleteAdmin(adminEmail._id, adminEmail.email)
-                        }
-                        className="btn-red"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </section>
-      </div>
-    </Layout>
+    <div className={styles["Admin"]}>
+      <h1>Manage Admins</h1>
+      <hr />
+      <section className={styles["admins--add-new"]}>
+        <h2>Add New Admin</h2>
+        <form onSubmit={addAdmin} className="flex row gap-x-2 my-[0.5cqw]">
+          <input
+            type="text"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            placeholder="adminaddress@gmail.com"
+          />
+          <Button $filled>Add</Button>
+        </form>
+      </section>
+      <section className={styles["admins--current"]}>
+        <h2>Admins</h2>
+        <table>
+          <thead>
+            <tr>
+              <td>Google Email Address</td>
+              <td></td>
+              <td></td>
+            </tr>
+          </thead>
+          <tbody>
+            {adminEmails.length > 0 &&
+              adminEmails.map((adminEmail) => (
+                <tr key={adminEmail._id}>
+                  <td>{adminEmail.email}</td>
+                  <td>
+                    {adminEmail.createdAt && prettyDate(adminEmail.createdAt)}
+                  </td>
+                  <td>
+                    <Button
+                      onClick={() =>
+                        deleteAdmin(adminEmail._id, adminEmail.email)
+                      }
+                    >
+                      Delete
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </section>
+    </div>
   );
 }

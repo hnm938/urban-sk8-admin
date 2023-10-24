@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 
 import styles from "@/styles/Layout.module.scss";
 import Sidebar from "./Sidebar";
+import { Button } from "@/components/StyledComponents";
 
 import Swal from "sweetalert2";
 
@@ -42,18 +43,18 @@ export default function Layout({children, sidebar, sidebarTitle, sidebarSubtitle
             <h2>Admin Panel</h2>
           </div>
           <div className="text-center w-full flex flex-col items-center gap-y-4">
-            <button
+            <Button
               onClick={() => {
                 signIn("google");
               }}
               className={styles["login-button"]}
             >
               Login with Google
-            </button>
+            </Button>
 
             <div className={styles["social-links"]}>
               <Link href="https://github.com/hnm938" target="_blank">
-                <button>
+                <Button>
                   <svg
                     className="h-8 w-8 text-red-500"
                     viewBox="0 0 24 24"
@@ -62,13 +63,13 @@ export default function Layout({children, sidebar, sidebarTitle, sidebarSubtitle
                   >
                     <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
                   </svg>
-                </button>
+                </Button>
               </Link>
               <Link
                 href="https://www.linkedin.com/in/abraham-hodos-212985270/"
                 target="_blank"
               >
-                <button>
+                <Button>
                   <svg
                     className="h-8 w-8 text-red-500"
                     viewBox="0 0 24 24"
@@ -79,10 +80,10 @@ export default function Layout({children, sidebar, sidebarTitle, sidebarSubtitle
                     <rect x="2" y="9" width="4" height="12" />{" "}
                     <circle cx="4" cy="4" r="2" />
                   </svg>
-                </button>
+                </Button>
               </Link>
               <Link href="https://urban-sk8-front.vercel.app/" target="_blank">
-                <button>
+                <Button>
                   <svg
                     className="h-8 w-8 text-red-500"
                     width="24"
@@ -98,7 +99,7 @@ export default function Layout({children, sidebar, sidebarTitle, sidebarSubtitle
                     <path d="M11.5 3a17 17 0 0 0 0 18" />{" "}
                     <path d="M12.5 3a17 17 0 0 1 0 18" />
                   </svg>
-                </button>
+                </Button>
               </Link>
             </div>
           </div>

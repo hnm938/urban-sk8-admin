@@ -5,10 +5,6 @@
   height: 100vh;
   min-height: fit-content;  
 
-  hr {
-    margin: 0.5em 0 1.5em 0;
-  }
-
   h1 {
     font-family: "Montserrat", sans-serif;
     font-size: clamp(32px, 1.5cqw, 1.5cqw);
@@ -18,7 +14,6 @@
 
   label {
     position: relative;
-    margin: 2cqw 0 1cqw 0;
     padding: 0 0 0.15cqw 0;
     
     border-bottom: solid var(--coral-1) 2px;
@@ -61,7 +56,7 @@
         position: absolute;
         top: -10px; right: -10px;
 
-        background-color: transparent;
+        background-color: transparent !important;
         z-index: 999;
 
         svg {

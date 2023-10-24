@@ -60,35 +60,35 @@ h1 {
   font-size: 1.5rem;
 }
 
-button {
-  width: fit-content;
-  padding: 0.5cqw 1cqw;
+// button {
+//   width: fit-content;
+//   padding: 0.5cqw 1cqw;
 
-  border: solid var(--coral-1) 1px;
-  border-radius: 4px;
+//   border: solid var(--coral-1) 1px;
+//   border-radius: 4px;
 
-  color: var(--coral-1);
-  font-weight: 600;
-  font-family: "Montserrat", sans-serif;
-  font-size: 14px;
+//   color: var(--coral-1);
+//   font-weight: 600;
+//   font-family: "Montserrat", sans-serif;
+//   font-size: 14px;
 
-  transition: all 150ms ease;
+//   transition: all 150ms ease;
 
-  &:hover {
-    color: var(--white-2);
-    background-color: var(--coral-1);
-  }
-}
+//   &:hover {
+//     color: var(--white-2);
+//     background-color: var(--coral-1);
+//   }
+// }
 
-button[filled] {
-  color: var(--white-2);
-  background-color: var(--coral-1);
-  border: none;
+// button[filled] {
+//   color: var(--white-2);
+//   background-color: var(--coral-1);
+//   border: none;
 
-  svg { color: var(--white-2) !important; }
+//   svg { color: var(--white-2) !important; }
 
-  &:hover { background-color: var(--coral-2); }
-}
+//   &:hover { background-color: var(--coral-2); }
+// }
 
 hr {
   width: 100%;
