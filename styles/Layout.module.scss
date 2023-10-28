@@ -53,9 +53,10 @@
     @include flex(column, center, center);
     
     h1 {
+      
       position: relative;
       &::after {
-        @include pseudo(calc(100% + 50px), 2px, var(--coral-1), 0, 1, -5px);
+        @include pseudo(calc(100% + 50px), 2px, var(--coral-1), 0, 1, -3px);
         left: 50%;
         transform: translateX(calc(-50% - 25px));
       }
