@@ -37,7 +37,7 @@ export default function Layout({children, sidebar, sidebarTitle, sidebarSubtitle
         <div className={styles["Login"]}>
           <div className={styles["title-container"]}>
             <div className="flex row gap-x-2">
-              <img src={logo.src} alt="" />
+              <img className="w-12 h-12 translate-y-[-10px]" src={logo.src} alt="" />
               <h1>Urban Sk8</h1>
             </div>
             <h2>Admin Panel</h2>
